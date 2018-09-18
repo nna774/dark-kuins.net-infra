@@ -1,5 +1,8 @@
 ask_sudo_password: true
 
+initializers:
+  - site.rb
+
 property_providers:
   - add_default:
       properties:

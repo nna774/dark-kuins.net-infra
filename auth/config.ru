@@ -22,7 +22,7 @@ use OmniAuth::Strategies::GitHub, ENV['GITHUB_KEY'], ENV['GITHUB_SECRET']
 run NginxOmniauthAdapter.app(
       providers: %i(github),
       key: ENV['RACK_SESSION_KEY'],
-      secret: ENV['RACK_SESSION_SECRET'],
+      secret: ENV['RACK_SESSION_SECRET'], # `openssl rand -base64 32`
       host: 'https://auth.dark-kuins.net',
       allowed_app_callback_url: %r(\Ahttps?://[^/]+\.(dark-kuins\.net|nna774\.net)/),
       app_refresh_interval: 60 * 60 * 24 * 2,

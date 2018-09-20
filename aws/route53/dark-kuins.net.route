@@ -1,0 +1,33 @@
+# -*- mode: ruby -*-
+
+template :iii do
+  rrset "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net.", 'A' do
+    ttl 600
+    resource_records context.to
+  end
+
+  rrset "#{context.name}.#{context.kind[0]}.#{context.region}.iii.dark-kuins.net.", 'CNAME' do
+    ttl 600
+    resource_records "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net."
+  end
+  rrset "#{context.name}.#{context.kind[0]}.#{context.region[0]}.iii.dark-kuins.net.", 'CNAME' do
+    ttl 600
+    resource_records "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net."
+  end
+end
+
+hosted_zone "dark-kuins.net." do
+  vpc 'ap-northeast-1', 'vpc-09e11cbdafca64241'
+  iii = [
+    { name: 'ushio', kind: 'compute', region: 'kitashirakawa', type: :a, to: '10.8.20.35' },
+  ]
+
+  iii.each do |host|
+    case host[:type]
+    when :a then
+      include_template :iii, name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]
+    else
+      raise 'unknown type'
+    end
+  end
+end

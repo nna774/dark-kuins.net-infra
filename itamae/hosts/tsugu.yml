@@ -1,0 +1,10 @@
+tsugu.compute.nishiogikubo.dark-kuins.net:
+  ask_sudo_password: false
+  properties:
+    ssh_options:
+      user: ubuntu
+    attributes:
+      aws:
+        region: ap-northeast-1
+    run_list:
+      - cookbooks/cloud-init/default.rb

@@ -84,12 +84,8 @@ node.merge!({
       'nana',
     ],
   },
+  hostname: 'sumi.border.kitashirakawa.dark-kuins.net'
 })
 include_cookbook 'sshd'
 
-file '/etc/hostname' do
-  content 'sumi.border.kitashirakawa.dark-kuins.net'
-  owner 'root'
-  group 'root'
-  mode '644'
-end
+include_cookbook 'hostname'

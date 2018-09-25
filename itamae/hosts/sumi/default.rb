@@ -1,5 +1,25 @@
 # sudo rsync wget をmitamaeの前に手で入れる必要がある。
 
+node.reverse_merge!({
+  pacman_myrepo: {
+    arch: 'aarch64'
+  },
+  nana: {
+    sudo_nopasswd: true,
+  },
+  disable_user: {
+    names: [
+      'alarm',
+    ],
+  },
+  sshd: {
+    allow_users: [
+      'nana',
+    ],
+  },
+  hostname: 'sumi.border.kitashirakawa.dark-kuins.net',
+})
+
 %w(
 dnsutils
 ).each do |p|
@@ -22,11 +42,6 @@ end
   end
 end
 
-node.merge!({
-  pacman_myrepo: {
-    arch: 'aarch64'
-  },
-})
 include_cookbook 'pacman-myrepo'
 
 package 'conserver'
@@ -62,30 +77,7 @@ remote_file '/etc/hosts' do
   mode '644'
 end
 
-node.merge!({
-  nana: {
-    sudo_nopasswd: true,
-  },
-})
 include_cookbook 'nana'
-
-node.merge!({
-  disable_user: {
-    names: [
-      'alarm',
-    ],
-  },
-})
 include_cookbook 'disable-users'
-
-node.merge!({
-  sshd: {
-    allow_users: [
-      'nana',
-    ],
-  },
-  hostname: 'sumi.border.kitashirakawa.dark-kuins.net'
-})
 include_cookbook 'sshd'
-
 include_cookbook 'hostname'

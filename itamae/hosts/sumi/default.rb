@@ -61,3 +61,10 @@ remote_file '/etc/hosts' do
   group 'root'
   mode '644'
 end
+
+node.merge!({
+  nana: {
+    sudo_nopasswd: true,
+  },
+})
+include_cookbook 'nana'

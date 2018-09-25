@@ -22,6 +22,7 @@ node.reverse_merge!({
 
 %w(
 dnsutils
+git
 ).each do |p|
   package p
 end

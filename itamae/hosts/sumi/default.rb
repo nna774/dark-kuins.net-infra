@@ -68,3 +68,12 @@ node.merge!({
   },
 })
 include_cookbook 'nana'
+
+node.merge!({
+  disable_user: {
+    names: [
+      'alarm',
+    ],
+  },
+})
+include_cookbook 'disable-users'

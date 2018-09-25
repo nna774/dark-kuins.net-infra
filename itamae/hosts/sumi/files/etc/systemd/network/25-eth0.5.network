@@ -1,0 +1,7 @@
+[Match]
+Name=eth0.5
+
+[Network]
+Address=10.8.1.10/24
+Gateway=10.8.1.1
+DNS=8.8.8.8

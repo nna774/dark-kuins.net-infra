@@ -1,0 +1,4 @@
+sumi.border.kitashirakawa.dark-kuins.net:
+  properties:
+    run_list:
+      - hosts/sumi/default.rb

@@ -1,0 +1,8 @@
+[Match]
+Name=eth0
+
+[Network]
+Address=240b:250:8020:d00:3141:5926:5358:9793/64
+Gateway=240b:250:8020:d00::fffe
+VLAN=eth0.5
+IPv6AcceptRA=false

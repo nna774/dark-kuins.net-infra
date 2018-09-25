@@ -1,0 +1,6 @@
+[NetDev]
+Name=eth0.5
+Kind=vlan
+
+[VLAN]
+Id=5

@@ -1,3 +1,6 @@
+node[:basedir] = File.expand_path('..', __FILE__)
+node[:secrets] = MitamaeSecrets::Store.new(File.join(node[:basedir],'secrets'))
+
 MItamae::RecipeContext.class_eval do
   ROLES_DIR = File.expand_path("../roles", __FILE__)
   def include_role(name)

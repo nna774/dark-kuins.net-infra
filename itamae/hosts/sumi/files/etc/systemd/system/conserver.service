@@ -1,0 +1,10 @@
+[Unit]
+Description = console server
+
+[Service]
+ExecStart = /usr/bin/conserver
+Restart = always
+Type = simple
+
+[Install]
+WantedBy = multi-user.target

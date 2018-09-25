@@ -1,0 +1,31 @@
+config * {
+}
+default full {
+	rw *;
+}
+default * {
+	logfile /var/log/conserver/&.log;
+	timestamp "";
+	include full;
+}
+
+access * {
+	trusted 127.0.0.1;
+	allowed 127.0.0.1;
+}
+
+console yukari {
+	master localhost;
+	type device;
+	device /dev/ttyUSB0;
+	baud 9600;
+	parity none;
+}
+
+console kizuna {
+	master localhost;
+	type device;
+	device /dev/ttyUSB1;
+	baud 9600;
+	parity none;
+}

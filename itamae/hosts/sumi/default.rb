@@ -22,4 +22,42 @@ end
   end
 end
 
+node.merge!({
+  pacman_myrepo: {
+    arch: 'aarch64'
+  },
+})
+include_cookbook 'pacman-myrepo'
 
+package 'conserver'
+%w(
+/etc/conserver
+/var/log/conserver
+).each do |d|
+  directory d do
+    owner 'root'
+    group 'root'
+    mode '755'
+  end
+end
+
+%w(
+/etc/conserver/conserver.cf
+/etc/systemd/system/conserver.service
+).each do |f|
+  remote_file f do
+    owner 'root'
+    group 'root'
+    mode '644'
+  end
+end
+
+service 'conserver' do
+  action [:start, :enable]
+end
+
+remote_file '/etc/hosts' do
+  owner 'root'
+  group 'root'
+  mode '644'
+end

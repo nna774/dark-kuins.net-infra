@@ -77,3 +77,12 @@ node.merge!({
   },
 })
 include_cookbook 'disable-users'
+
+node.merge!({
+  sshd: {
+    allow_users: [
+      'nana',
+    ],
+  },
+})
+include_cookbook 'sshd'

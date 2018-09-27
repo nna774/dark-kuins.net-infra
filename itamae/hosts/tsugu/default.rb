@@ -32,3 +32,5 @@ include_cookbook 'strongswan'
     mode '0644'
   end
 end
+
+include_role 'internal-dns'

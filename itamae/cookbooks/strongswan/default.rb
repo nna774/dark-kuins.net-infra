@@ -1,4 +1,6 @@
 package 'strongswan'
+package 'strongswan-swanctl'
+package 'charon-systemd'
 
 template '/etc/ipsec.conf' do
   owner 'root'

@@ -16,7 +16,7 @@ template :iii do
   end
 end
 
-hosted_zone "iii.dark-kuins.net." do
+hosted_zone 'iii.dark-kuins.net.' do
   vpc 'ap-northeast-1', 'vpc-09e11cbdafca64241'
   iii = [
     { name: 'ushio', kind: 'compute', region: 'kitashirakawa', type: :a, to: '10.8.20.35' },

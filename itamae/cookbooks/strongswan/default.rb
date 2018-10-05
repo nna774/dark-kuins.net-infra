@@ -1,20 +1,12 @@
-package 'strongswan'
 package 'strongswan-swanctl'
 package 'charon-systemd'
 
-template '/etc/ipsec.conf' do
-  owner 'root'
-  group 'root'
-  mode '0644'
-  notifies :restart, 'service[strongswan]'
-end
-
-template '/etc/ipsec.secrets' do
+template '/etc/swanctl/conf.d/tsugu.conf' do
   owner 'root'
   group 'root'
   mode '0400'
   variables(psk: node[:secrets][:tsugu_kizuna_psk])
-  notifies :restart, 'service[strongswan]'
+  notifies :restart, 'service[strongswan-swanctl]'
 end
 
-service 'strongswan'
+service 'strongswan-swanctl'

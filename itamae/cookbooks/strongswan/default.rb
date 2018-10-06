@@ -1,7 +1,7 @@
 package 'strongswan-swanctl'
 package 'charon-systemd'
 
-template '/etc/swanctl/conf.d/tsugu.conf' do
+template '/etc/swanctl/conf.d/kizuna.conf' do
   owner 'root'
   group 'root'
   mode '0400'

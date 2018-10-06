@@ -9,7 +9,3 @@ file '/etc/apt/sources.list.d/treasure-data.list' do
 end
 
 package 'td-agent'
-
-service 'td-agent' do
-  action [:start, :enable]
-end

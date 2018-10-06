@@ -26,3 +26,7 @@ template '/etc/td-agent/td-agent.conf' do
   mode '644'
   notifies :restart, 'service[td-agent]'
 end
+
+service 'td-agent' do
+  action [:start, :enable]
+end

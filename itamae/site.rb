@@ -10,7 +10,7 @@ execute 'apt-get update' do
 end
 
 define :apt_key, keyname: nil do
-  name = params[:keyname]
+  name = params[:keyname] || params[:name]
   execute "apt-key #{name}" do
     command "apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys #{name}"
     not_if "apt-key export #{name} | grep -q PGP"

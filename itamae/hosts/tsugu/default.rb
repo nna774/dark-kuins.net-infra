@@ -34,3 +34,5 @@ include_cookbook 'strongswan'
 end
 
 include_role 'internal-dns'
+
+include_role 'td-agent-aggregate'

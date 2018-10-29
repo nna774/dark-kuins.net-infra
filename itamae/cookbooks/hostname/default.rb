@@ -4,9 +4,3 @@ file '/etc/hostname' do
   group 'root'
   mode '644'
 end
-
-
-
-
-
-

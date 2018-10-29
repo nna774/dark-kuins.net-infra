@@ -60,7 +60,7 @@ file "/home/#{username}/.ssh/authorized_keys" do
 end
 
 file '/etc/sudoers.d/opuser' do
-  content node[:nana].fetch(:sudo_nopasswd) ? "#{username} ALL=(ALL) NOPASSWD:ALL\n" : "#{username} ALL=(ALL) ALL"
+  content node[:nana].fetch(:sudo_nopasswd) ? "#{username} ALL=(ALL) NOPASSWD:ALL\n" : "#{username} ALL=(ALL) ALL\n"
   owner 'root'
   group 'root'
   mode '440'

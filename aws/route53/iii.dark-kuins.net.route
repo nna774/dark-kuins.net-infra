@@ -1,11 +1,6 @@
 # -*- mode: ruby -*-
 
-template :iii do
-  rrset "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net.", 'A' do
-    ttl 600
-    resource_records context.to
-  end
-
+template :iii_short do
   rrset "#{context.name}.#{context.kind[0]}.#{context.region}.iii.dark-kuins.net.", 'CNAME' do
     ttl 600
     resource_records "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net."
@@ -16,18 +11,36 @@ template :iii do
   end
 end
 
+template :iii_a do
+  rrset "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net.", 'A' do
+    ttl 600
+    resource_records context.to
+  end
+
+  include_template :iii_short
+end
+
+template :iii_cname do
+  rrset "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net.", 'CNAME' do
+    ttl 600
+    resource_records context.to
+  end
+
+  include_template :iii_short
+end
+
 hosted_zone 'iii.dark-kuins.net.' do
   vpc 'ap-northeast-1', 'vpc-09e11cbdafca64241'
-  iii = [
-    { name: 'ushio', kind: 'compute', region: 'kitashirakawa', type: :a, to: '10.8.20.35' },
-  ]
+  iii = JSON.parse(File.read('../../iii/iii.json'), { symbolize_names: true })
 
   iii.each do |host|
     case host[:type]
-    when :a then
-      include_template :iii, name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]
+    when 'a' then
+      include_template :iii_a, name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]
+    when 'cname' then
+      include_template :iii_cname, name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]
     else
-      raise 'unknown type'
+      raise "unknown type: #{host[:type]}"
     end
   end
 end

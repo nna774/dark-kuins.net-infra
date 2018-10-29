@@ -1,0 +1,65 @@
+[
+  {
+    "name": "yukari",
+    "kind": "router",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.0.1"
+  },
+  {
+    "name": "kizuna",
+    "kind": "router",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.0.2"
+  },
+  {
+    "name": "octocat",
+    "kind": "switch",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.0.33"
+  },
+  {
+    "name": "noracat",
+    "kind": "switch",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.0.34"
+  },
+  {
+    "name": "tokinosora",
+    "kind": "ap",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.0.49"
+  },
+  {
+    "name": "sumi",
+    "kind": "border",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.1.10"
+  },
+  {
+    "name": "ushio",
+    "kind": "compute",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.20.35"
+  },
+  {
+    "name": "tsugu",
+    "kind": "compute",
+    "region": "nishiogikubo",
+    "type": "a",
+    "to": "10.8.192.10"
+  },
+  {
+    "name": "tsugu",
+    "kind": "router",
+    "region": "nishiogikubo",
+    "type": "cname",
+    "to": "tsugu.compute.nishiogikubo.iii.dark-kuins.net"
+  }
+]

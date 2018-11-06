@@ -1,4 +1,4 @@
-packages = %w(git htop tmux emacs-nox make build-essential mongodb-clients golang-go)
+packages = %w(git htop tmux emacs-nox make build-essential mongodb-clients golang-go traceroute)
 packages.each do |p|
   package p do
     action :install

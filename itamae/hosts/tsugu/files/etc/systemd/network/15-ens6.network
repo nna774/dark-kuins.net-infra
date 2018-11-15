@@ -2,6 +2,6 @@
 Name=ens6
 
 [Network]
-Address=10.8.200.10/24
-Address=2406:da14:37f:7c1a::10/64
-Address=2406:da14:37f:7c1a::fffe/64
+Address=10.8.202.10/24
+Address=2406:da14:37f:7c1d::10/64
+Address=2406:da14:37f:7c1d::fffe/64

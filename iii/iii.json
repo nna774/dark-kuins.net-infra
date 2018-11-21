@@ -49,6 +49,13 @@
     "to": "10.8.20.35"
   },
   {
+    "name": "akashi",
+    "kind": "compute",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.30.13"
+  },
+  {
     "name": "tsugu",
     "kind": "compute",
     "region": "nishiogikubo",

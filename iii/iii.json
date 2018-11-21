@@ -60,7 +60,7 @@
     "kind": "compute",
     "region": "nishiogikubo",
     "type": "a",
-    "to": "10.8.192.10"
+    "to": "10.8.192.42"
   },
   {
     "name": "tsugu",

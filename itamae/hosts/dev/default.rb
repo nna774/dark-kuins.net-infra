@@ -38,3 +38,11 @@ execute 'set gopath' do
   command "mkdir -p #{gopath}; touch ~/.bashrc; echo GOPATH=#{gopath} >> ~/.bashrc"
   not_if 'grep \'GOPATH=\' ~/.bashrc'
 end
+
+# for rbenv
+packages = %w(libssl-dev libreadline-dev zlib1g-dev)
+packages.each do |p|
+  package p do
+    action :install
+  end
+end

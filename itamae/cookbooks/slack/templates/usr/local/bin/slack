@@ -1,0 +1,21 @@
+#!/bin/bash -exu
+
+FILE=$(mktemp -t slackXXXX)
+trap "rm ${FILE}" 0
+
+cat - | tr '\n' '\\' | sed 's/\\/\\n/g' > ${FILE}
+
+WH_URI='<%= @wh_uri %>'
+CHANNEL=${CHANNEL:-'<%= @default_channel || '#nona-kanshi' %>'}
+NAME=${NAME:-<%= @name || '`hostname`' %>}
+ICON=${ICON:-'<%= @icon || ':dove_of_peace:' %>'}
+MESSAGE=`cat ${FILE}`
+
+payload="payload={
+  \"channel\": \"${CHANNEL}\",
+  \"username\": \"${NAME}\",
+  \"icon_emoji\": \"${ICON}\",
+  \"text\": \"${MESSAGE}\"
+}"
+
+curl -q -s -S -X POST --data-urlencode "${payload}" ${WH_URI}

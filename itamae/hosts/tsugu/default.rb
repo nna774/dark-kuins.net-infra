@@ -38,3 +38,5 @@ include_role 'internal-dns'
 include_role 'td-agent-aggregate'
 
 include_cookbook 'iptables'
+
+include_cookbook 'slack'

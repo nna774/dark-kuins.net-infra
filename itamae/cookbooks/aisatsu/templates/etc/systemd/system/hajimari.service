@@ -1,0 +1,11 @@
+[Unit]
+Description=hello
+Requires=network.service
+After=network.service unbound.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '/bin/echo "次は殺さないでね。" | /usr/local/bin/slack'
+
+[Install]
+WantedBy=multi-user.target

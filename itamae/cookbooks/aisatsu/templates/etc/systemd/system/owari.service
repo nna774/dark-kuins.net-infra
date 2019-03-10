@@ -1,0 +1,11 @@
+[Unit]
+Description=Tell Owari
+Before=shutdown.target
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c '/bin/echo "終わりー" | /usr/local/bin/slack'
+
+[Install]
+WantedBy=shutdown.target

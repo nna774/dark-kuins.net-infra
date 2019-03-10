@@ -46,3 +46,5 @@ packages.each do |p|
     action :install
   end
 end
+
+include_cookbook 'slack'

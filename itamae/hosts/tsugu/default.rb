@@ -37,6 +37,7 @@ include_role 'internal-dns'
 
 include_role 'td-agent-aggregate'
 
+include_cookbook 'postfix'
 directory '/etc/postfix/' do
   owner 'root'
   group 'root'
@@ -49,7 +50,6 @@ remote_file '/etc/postfix/main.cf' do
   mode '644'
   notifies 'service[postfix]', :restart
 end
-include_cookbook 'postfix'
 
 include_cookbook 'iptables'
 

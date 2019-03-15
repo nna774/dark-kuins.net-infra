@@ -88,6 +88,16 @@ ec2 "vpc-09e11cbdafca64241" do
           "0.0.0.0/0"
         )
       end
+      permission :tcp, 80 do
+        ip_ranges(
+          "0.0.0.0/0"
+        )
+      end
+      permission :tcp, 443 do
+        ip_ranges(
+          "0.0.0.0/0"
+        )
+      end
       permission :udp, 500..500 do
         ip_ranges(
           "0.0.0.0/0"

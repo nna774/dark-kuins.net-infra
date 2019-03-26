@@ -14,6 +14,14 @@ node.reverse_merge!({
   },
   hostname: 'tsugu.compute.nishiogikubo.dark-kuins.net',
   os: :ubuntu,
+  nginx: {
+    dhparam_user: 'root',
+  },
+  rproxy: {
+    canonical: 'tsugu.compute.nishiogikubo.dark-kuins.net',
+    alts: [
+    ],
+  },
 })
 include_cookbook 'nana'
 include_cookbook 'disable-users'
@@ -57,3 +65,5 @@ include_cookbook 'slack'
 include_cookbook 'aisatsu'
 
 include_role 'prometheus'
+
+include_role 'rproxy'

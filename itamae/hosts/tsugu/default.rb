@@ -20,6 +20,7 @@ node.reverse_merge!({
   rproxy: {
     canonical: 'tsugu.compute.nishiogikubo.dark-kuins.net',
     alts: [
+      'grafana.dark-kuins.net',
     ],
   },
 })

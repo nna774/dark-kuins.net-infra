@@ -6,11 +6,17 @@ node.reverse_merge!({
 
 include_cookbook 'nginx'
 
-remote_file '/etc/nginx/conf.d/default.conf' do
-  owner 'root'
-  group 'root'
-  mode '0644'
-  notifies :reload, 'service[nginx]'
+%w(
+/etc/nginx/conf.d/default.conf
+/etc/nginx/utils/dark-kuins_auth_location.conf
+/etc/nginx/utils/dark-kuins_auth_server.conf
+).each do |f|
+  remote_file f do
+    owner 'root'
+    group 'root'
+    mode '0644'
+    notifies :reload, 'service[nginx]'
+  end
 end
 
 webroot = node[:rproxy][:webroot] || '/var/www/certbot' 
@@ -27,6 +33,17 @@ template '/etc/nginx/utils/certbot.conf' do
   mode '0644'
 end 
 
+template '/etc/nginx/tls_modern.conf' do
+  variables ({
+		dns: '10.8.192.42',
+		cert: '/etc/letsencrypt/live/tsugu.compute.nishiogikubo.dark-kuins.net/fullchain.pem',
+		key: '/etc/letsencrypt/live/tsugu.compute.nishiogikubo.dark-kuins.net/privkey.pem',
+  })
+  owner 'root'
+  group 'root'
+  mode '0644'
+end
+
 %w(
 /etc/nginx/conf.d/grafana.conf
 ).each do |t|
@@ -37,10 +54,11 @@ end
     notifies :reload, 'service[nginx]'
   end
 end
-node[:rproxy][:dry_run_certbot] = true
+
+#node[:rproxy][:dry_run_certbot] = true
 domains = "-d #{node[:rproxy][:canonical]}"
 dry_run = node[:rproxy][:dry_run_certbot] ? '--dry-run' : ''
 node[:rproxy][:alts].each {|d| domains += " -d #{d}" }
-execute "certbot certonly --webroot --webroot-path #{webroot} --non-interactive --preferred-challenges http-01 --agree-tos #{domains} --email rproxy-certs@nna774.net #{dry_run}" do
+execute "certbot certonly --webroot --webroot-path #{webroot} --expand --non-interactive --preferred-challenges http-01 --agree-tos #{domains} --email rproxy-certs@nna774.net #{dry_run}" do
   not_if "test -e /etc/letsencrypt/live/#{node[:rproxy][:canonical]}"
 end

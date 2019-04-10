@@ -68,3 +68,5 @@ include_cookbook 'aisatsu'
 include_role 'prometheus'
 
 include_role 'rproxy'
+
+include_cookbook 'mackerel-agent'

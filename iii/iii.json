@@ -68,5 +68,19 @@
     "region": "nishiogikubo",
     "type": "cname",
     "to": "tsugu.compute.nishiogikubo.iii.dark-kuins.net"
+  },
+  {
+    "name": "kasuga",
+    "kind": "compute",
+    "region": "nakanoshima",
+    "type": "a",
+    "to": "10.8.208.42"
+  },
+  {
+    "name": "kasuga",
+    "kind": "router",
+    "region": "nakanoshima",
+    "type": "cname",
+    "to": "kasuga.compute.nakanoshima.iii.dark-kuins.net"
   }
 ]

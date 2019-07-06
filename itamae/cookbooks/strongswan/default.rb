@@ -26,3 +26,11 @@ template '/etc/swanctl/conf.d/yukari.conf' do
 end
 
 service 'strongswan-swanctl'
+
+file '/etc/swanctl/swanctl.conf' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  content "include conf.d/*.conf\n"
+  notifies :restart, 'service[strongswan-swanctl]'
+end

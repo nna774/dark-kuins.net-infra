@@ -1,0 +1,10 @@
+kasuga.compute.nakanoshima.dark-kuins.net:
+  ask_sudo_password: false
+  properties:
+    ssh_options:
+      user: nona
+    attributes:
+      gcp:
+        region: asia-northeast2
+    run_list:
+      - hosts/kasuga/default.rb

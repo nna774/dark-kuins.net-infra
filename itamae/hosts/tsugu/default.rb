@@ -23,6 +23,12 @@ node.reverse_merge!({
       'grafana.dark-kuins.net',
     ],
   },
+  strongswan: {
+    profiles: [
+      { name: 'yukari.conf', psk: node[:secrets][:tsugu_yukari_psk] },
+      { name: 'noja.conf', psk: node[:secrets][:tsugu_noja_psk] },
+    ],
+  },
 })
 include_cookbook 'nana'
 include_cookbook 'disable-users'

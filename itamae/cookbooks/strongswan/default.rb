@@ -17,12 +17,14 @@ directory '/etc/swanctl/conf.d' do
   mode '0755'
 end
 
-template '/etc/swanctl/conf.d/yukari.conf' do
-  owner 'root'
-  group 'root'
-  mode '0400'
-  variables(psk: node[:secrets][:tsugu_yukari_psk])
-  notifies :restart, 'service[strongswan-swanctl]'
+node[:strongswan][:profiles].each do |p|
+  template "/etc/swanctl/conf.d/#{p[:name]}" do
+    owner 'root'
+    group 'root'
+    mode '0400'
+    variables(psk: p[:psk])
+    notifies :restart, 'service[strongswan-swanctl]'
+  end
 end
 
 service 'strongswan-swanctl'

@@ -17,6 +17,26 @@ define :apt_key, keyname: nil do
   end
 end
 
+case node[:platform]
+when 'ubuntu'
+  node[:release] = {
+    '14.04' => :trusty,
+    '16.04' => :xenial,
+    '18.04' => :bionic,
+    '19.04' => :disco,
+  }.fetch(node[:platform_version])
+  node[:is_systemd] = node[:release] != '14.04'
+when 'debian'
+  node[:release] =  {
+    '7' => :wheezy,
+    '8' => :jessie,
+    '9' => :stretch,
+  }.fetch(node[:platform_version].split('.', 2)[0])
+  node[:is_systemd] = node[:release] != '7'
+when 'arch'
+  node[:is_systemd] = true
+end
+
 MItamae::RecipeContext.class_eval do
   ROLES_DIR = File.expand_path("../roles", __FILE__)
   def include_role(name)

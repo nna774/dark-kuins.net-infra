@@ -1,3 +1,4 @@
+package 'binutils'
 package 'strongswan-swanctl'
 package 'charon-systemd'
 

@@ -16,18 +16,10 @@ def include_template(name, options = @context)
     raise 'unknown template'
   end
 
-  def method_missing_(name, _ = nil, __ = nil)
-    if name == :context
-      return @context
-    end
-    super
-  end
-
   @context = OpenStruct.new(options)
   def context
     @context
   end
-  # binding.pry
   t[]
 end
 

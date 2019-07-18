@@ -6,6 +6,10 @@ node.reverse_merge!({
       { name: 'kasuga-yukari.conf', psk: node[:secrets][:kasuga_yukari_psk] },
     ],
   },
+  internal_dns: {
+    self_search: 'compute.nakanoshima.dark-kuins.net nakanoshima.dark-kuins.net',
+    forward_addr: '169.254.169.254',
+  },
 })
 include_cookbook 'strongswan'
 
@@ -24,3 +28,5 @@ file '/etc/sysctl.d/50-ip-forward.conf' do
   mode '0644'
   content "net.ipv4.ip_forward = 1\n"
 end
+
+include_role 'internal-dns'

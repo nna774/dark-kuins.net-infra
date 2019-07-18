@@ -29,6 +29,10 @@ node.reverse_merge!({
       { name: 'noja.conf', psk: node[:secrets][:tsugu_noja_psk] },
     ],
   },
+  internal_dns: {
+    self_search: 'compute.nishiogikubo.dark-kuins.net nishiogikubo.dark-kuins.net',
+    forward_addr: '169.254.169.253',
+  },
 })
 include_cookbook 'nana'
 include_cookbook 'disable-users'

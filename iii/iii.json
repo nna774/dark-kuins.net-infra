@@ -21,6 +21,13 @@
     "to": "10.8.0.33"
   },
   {
+    "name": "kaede",
+    "kind": "switch",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.0.35"
+  },
+  {
     "name": "noracat",
     "kind": "switch",
     "region": "kitashirakawa",

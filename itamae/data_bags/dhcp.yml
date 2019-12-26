@@ -26,6 +26,9 @@ nets:
       - name: akashi
         addr: 10.8.30.13
         mac: 28:c6:8e:36:e8:0f
+      - name: alice
+        addr: 10.8.30.193
+        mac: b8:27:eb:e6:cf:98
       - name: rmmini
         addr: 10.8.30.252
         mac: 34:ea:34:58:a1:f0

@@ -61,4 +61,9 @@ MItamae::RecipeContext.class_eval do
     end
     raise "Cookbook #{name} couldn't found"
   end
+
+  DATA_BAGSS_DIR = File.expand_path('../data_bags', __FILE__)
+  def data_bag(name)
+    YAML.load(File.read(File.join(DATA_BAGSS_DIR, "#{name}.yml")))
+  end
 end

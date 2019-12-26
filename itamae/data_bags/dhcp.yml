@@ -1,0 +1,47 @@
+nets:
+  - name: nishiogikubo
+    net: 10.8.192.32
+    mask: 255.255.255.240
+    non_authoritative: true
+  - name: nakanoshima
+    net: 10.8.208.32
+    mask: 255.255.255.240
+    non_authoritative: true
+  - name: users
+    net: 10.8.30.0
+    mask: 255.255.255.0
+    begin: 10.8.30.128
+    masterend: 10.8.30.159
+    slavebegin: 10.8.30.160
+    end: 10.8.30.191
+    gateway: 10.8.30.1
+    broadcast: 10.8.30.255
+    dns:
+      - 10.8.192.42
+      - 10.8.208.42
+    domain: users.kitashirakawa.iii.dark-kuins.net
+    ntp:
+      - 10.8.30.1
+    fix_assigns:
+      - name: akashi
+        addr: 10.8.30.13
+        mac: 28:c6:8e:36:e8:0f
+      - name: rmmini
+        addr: 10.8.30.252
+        mac: 34:ea:34:58:a1:f0
+  - name: guest
+    net: 10.255.255.0
+    mask: 255.255.255.0
+    begin: 10.255.255.128
+    masterend: 10.255.255.159
+    slavebegin: 10.255.255.160
+    end: 10.255.255.191
+    gateway: 10.255.255.1
+    broadcast: 10.255.255.255
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+    domain: kitashirakawa.guest.dark-kuins.net
+    ntp: # ntp.nict.jp
+      - 133.243.238.163
+      - 133.243.238.243

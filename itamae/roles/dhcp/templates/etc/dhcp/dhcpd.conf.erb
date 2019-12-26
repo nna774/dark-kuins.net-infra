@@ -1,0 +1,29 @@
+default-lease-time 3600;
+max-lease-time 86400;
+
+ddns-update-style none;
+
+<% @nets.each do |net| -%>
+  <% if net['non_authoritative'] %>
+    subnet <%= net['net'] %> netmask <%= net['mask'] %> { # name: <%= net['name'] %>
+      not authoritative;
+    }
+  <% else %>
+    subnet <%= net['net'] %> netmask <%= net['mask'] %> { # name: <%= net['name'] %>
+      range <%= @master ? net['begin'] : net['slavebegin'] %> <%= @master ? net['masterend'] : net['end'] %>;
+      option routers <%= net['gateway'] %>;
+      option broadcast-address <%= net['broadcast'] %>;
+      option subnet-mask <%= net['mask'] %>;
+      option domain-name "<%= net['domain'] %>";
+      option domain-name-servers <%= net['dns'].join ', ' %>;
+      option ntp-servers <%= net['ntp'].join ', ' %>;
+    }
+    <% net['fix_assigns']&.each do |h| %>
+      host <%= h['name'] %> {
+        hardware ethernet <%= h['mac'] %>;
+        fixed-address <%= h['addr'] %>;
+      }
+    <% end -%>
+  <% end -%>
+<% end -%>
+

@@ -10,6 +10,10 @@ node.reverse_merge!({
     self_search: 'compute.nakanoshima.dark-kuins.net nakanoshima.dark-kuins.net',
     forward_addr: '169.254.169.254',
   },
+  dhcp: {
+    role: :slave,
+    interfacesv4: 'ens4',
+  },
 })
 include_cookbook 'strongswan'
 
@@ -30,3 +34,5 @@ file '/etc/sysctl.d/50-ip-forward.conf' do
 end
 
 include_role 'internal-dns'
+
+include_role 'dhcp'

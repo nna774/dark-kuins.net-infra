@@ -33,6 +33,10 @@ node.reverse_merge!({
     self_search: 'compute.nishiogikubo.dark-kuins.net nishiogikubo.dark-kuins.net',
     forward_addr: '169.254.169.253',
   },
+  dhcp: {
+    role: :master,
+    interfacesv4: 'ens5',
+  },
 })
 include_cookbook 'nana'
 include_cookbook 'disable-users'
@@ -80,3 +84,5 @@ include_role 'prometheus'
 include_role 'rproxy'
 
 include_cookbook 'mackerel-agent'
+
+include_role 'dhcp'

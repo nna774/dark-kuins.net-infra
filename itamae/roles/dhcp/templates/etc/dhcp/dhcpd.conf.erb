@@ -17,13 +17,13 @@ ddns-update-style none;
       option domain-name "<%= net['domain'] %>";
       option domain-name-servers <%= net['dns'].join ', ' %>;
       option ntp-servers <%= net['ntp'].join ', ' %>;
-    }
     <% net['fix_assigns']&.each do |h| %>
       host <%= h['name'] %> {
         hardware ethernet <%= h['mac'] %>;
         fixed-address <%= h['addr'] %>;
       }
-    <% end -%>
+    <% end %>
+    }
   <% end -%>
 <% end -%>
 

@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  apply:
+    name: apply iii
+    env:
+      ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
+      SECRET_KEY: ${{ secrets.SECRET_KEY }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: bundle install
+        run: bundle install
+        working-directory: aws/route53
+      - name: apply
+        run: change=`git diff HEAD^..HEAD ../../iii/iii.json`; [ -z "${change}" ] || bundle exec roadwork -a -k ${ACCESS_KEY} -s ${SECRET_KEY}
+        working-directory: aws/route53

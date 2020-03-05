@@ -103,5 +103,13 @@
     "region": "nakanoshima",
     "type": "cname",
     "to": "kasuga.compute.nakanoshima.iii.dark-kuins.net."
+  },
+
+  {
+    "name": "test",
+    "kind": "test",
+    "region": "test",
+    "type": "cname",
+    "to": "test.dark-kuins.net."
   }
 ]

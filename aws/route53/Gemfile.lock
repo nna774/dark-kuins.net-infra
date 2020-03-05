@@ -4,28 +4,28 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     aws-eventstream (1.0.3)
-    aws-partitions (1.220.0)
-    aws-sdk-core (3.68.0)
+    aws-partitions (1.279.0)
+    aws-sdk-core (3.90.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
-      aws-partitions (~> 1.0)
+      aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
       jmespath (~> 1.0)
-    aws-sdk-ec2 (1.110.0)
-      aws-sdk-core (~> 3, >= 3.61.1)
+    aws-sdk-ec2 (1.146.0)
+      aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sdk-route53 (1.29.0)
-      aws-sdk-core (~> 3, >= 3.61.1)
+    aws-sdk-route53 (1.30.0)
+      aws-sdk-core (~> 3, >= 3.71.0)
       aws-sigv4 (~> 1.1)
-    aws-sigv4 (1.1.0)
+    aws-sigv4 (1.1.1)
       aws-eventstream (~> 1.0, >= 1.0.2)
     diffy (3.3.0)
     dnsruby (1.61.3)
       addressable (~> 2.5)
-    hashie (3.6.0)
+    hashie (4.1.0)
     jmespath (1.4.0)
     macaddr (1.7.2)
       systemu (~> 2.6.5)
-    public_suffix (4.0.1)
+    public_suffix (4.0.3)
     roadworker (0.5.12)
       aws-sdk-route53 (>= 1.22.0)
       diffy
@@ -34,10 +34,12 @@ GEM
       systemu
       term-ansicolor
       uuid
+    sync (0.5.0)
     systemu (2.6.5)
     term-ansicolor (1.7.1)
       tins (~> 1.0)
-    tins (1.21.1)
+    tins (1.24.1)
+      sync
     uuid (2.3.9)
       macaddr (~> 1.0)
 
@@ -49,4 +51,4 @@ DEPENDENCIES
   roadworker (>= 0.5.9.beta7)
 
 BUNDLED WITH
-   1.17.1
+   2.1.4

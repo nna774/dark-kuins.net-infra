@@ -112,8 +112,10 @@ end
 def execute
   show
 
-  puts "press enter to continue"
-  gets
+  if !ENV['AUTO_APPLY']
+    puts "press enter to continue"
+    gets
+  end
   puts "start"
   execute_create
   execute_update

@@ -79,7 +79,7 @@ include_cookbook 'iptables'
 include_cookbook 'slack'
 include_cookbook 'aisatsu'
 
-include_role 'prometheus'
+#include_role 'prometheus'
 
 include_role 'rproxy'
 

@@ -25,6 +25,7 @@ when 'ubuntu'
     '18.04' => :bionic,
     '19.04' => :disco,
     '19.10' => :eoan,
+    '20.04' => :focal,
   }.fetch(node[:platform_version])
   node[:is_systemd] = node[:release] != '14.04'
 when 'debian'

@@ -86,3 +86,9 @@ include_cookbook 'aisatsu'
 include_cookbook 'mackerel-agent'
 
 include_role 'dhcp'
+
+%w(
+inetutils-traceroute
+).each do |p|
+  package p
+end

@@ -157,6 +157,11 @@ def hosted_zone(z, &body)
         end
       end
       execute
+      @records = {}
+      # @templates = {}
+      @create = []
+      @update = []
+      @destroy = []
     end
   end
 end

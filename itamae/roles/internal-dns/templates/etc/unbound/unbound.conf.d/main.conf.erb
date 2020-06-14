@@ -13,7 +13,12 @@ server:
   private-domain: local.
 
   val-permissive-mode: yes
+  local-zone: "10.in-addr.arpa." transparent
 
 forward-zone:
   name: "iii.dark-kuins.net."
+  forward-addr: <%= @forward %>
+
+forward-zone:
+  name: "10.in-addr.arpa."
   forward-addr: <%= @forward %>

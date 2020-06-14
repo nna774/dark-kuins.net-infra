@@ -29,9 +29,19 @@ template :iii_cname do
   include_template :iii_short
 end
 
+template :iii_rev do
+  tos = context.to.split ?.
+  r = tos.reverse.join ?.
+  rrset "#{r}.in-addr.arpa.", 'PTR' do
+    ttl 600
+    resource_records "#{context.name}.#{context.kind}.#{context.region}.iii.dark-kuins.net."
+  end
+end
+
+iii = JSON.parse(File.read('../../iii/iii.json'), { symbolize_names: true })
+
 hosted_zone 'iii.dark-kuins.net.' do
   vpc 'ap-northeast-1', 'vpc-09e11cbdafca64241'
-  iii = JSON.parse(File.read('../../iii/iii.json'), { symbolize_names: true })
 
   iii.each do |host|
     case host[:type]
@@ -41,6 +51,16 @@ hosted_zone 'iii.dark-kuins.net.' do
       include_template :iii_cname, name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]
     else
       raise "unknown type: #{host[:type]}"
+    end
+  end
+end
+
+hosted_zone '10.in-addr.arpa.' do
+  vpc 'ap-northeast-1', 'vpc-09e11cbdafca64241'
+
+  iii.each do |host|
+    if host[:to].match /\d+\.\d+\.\d+\.\d+/
+      include_template :iii_rev, name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]
     end
   end
 end

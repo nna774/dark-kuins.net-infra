@@ -13,12 +13,45 @@ server:
   private-domain: local.
 
   val-permissive-mode: yes
-  local-zone: "10.in-addr.arpa." transparent
 
-forward-zone:
-  name: "iii.dark-kuins.net."
-  forward-addr: <%= @forward %>
+<%
+def full(name:, kind:, region:)
+  "#{name}.#{kind}.#{region}.iii.dark-kuins.net"
+end
+def rrset(type:, fqdn:, value:, ttl: 600)
+  %Q(local-data: "#{fqdn} #{ttl} IN #{type} #{value}")
+end
+def iii_short(name:, kind:, region:)
+  to = full(name: name, kind: kind, region: region)
+  [
+    rrset(type: 'CNAME', fqdn: "#{name}.#{kind[0]}.#{region}.iii.dark-kuins.net", value: to),
+    rrset(type: 'CNAME', fqdn: "#{name}.#{kind[0]}.#{region[0]}.iii.dark-kuins.net", value: to),
+  ]
+end
+def iii_a(name:, kind:, region:, to:)
+  iii_short(name: name, kind: kind, region: region) + [
+    rrset(type: 'A', fqdn: full(name: name, kind: kind, region: region), value: to)
+  ]
+end
+def iii_cname(name:, kind:, region:, to:)
+  iii_short(name: name, kind: kind, region: region) + [
+    rrset(type: 'CNAME', fqdn: full(name: name, kind: kind, region: region), value: to)
+  ]
+end
+%>
+local-zone: "10.in-addr.arpa." static
 
-forward-zone:
-  name: "10.in-addr.arpa."
-  forward-addr: <%= @forward %>
+local-zone: "iii.dark-kuins.net." static
+local-data: "iii.dark-kuins.net. "
+<%=
+  @iii.map do |host|
+    case host[:type]
+    when 'a' then
+      iii_a(name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]).join ?\n
+    when 'cname' then
+      iii_cname(name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]).join ?\n
+    else
+      raise "unknown type: #{host[:type]}"
+    end
+  end.join ?\n
+%>

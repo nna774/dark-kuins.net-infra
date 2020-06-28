@@ -19,12 +19,13 @@ if !node[:internal_dns][:keep_resolveconf]
   end
 end
 
+iii = data_bag('iii', type: :json)
 template '/etc/unbound/unbound.conf.d/main.conf' do
   owner 'root'
   group 'root'
   mode '0644'
   notifies :restart, 'service[unbound]'
   variables ({
-    forward: node[:internal_dns][:forward_addr]
+    iii: iii,
   })
 end

@@ -1,7 +1,7 @@
 GEM
   remote: https://rubygems.org/
   specs:
-    addressable (2.7.0)
+    addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     aws-eventstream (1.0.3)
     aws-partitions (1.284.0)
@@ -25,7 +25,7 @@ GEM
     jmespath (1.4.0)
     macaddr (1.7.2)
       systemu (~> 2.6.5)
-    public_suffix (4.0.3)
+    public_suffix (4.0.6)
     roadworker (0.5.12)
       aws-sdk-route53 (>= 1.22.0)
       diffy

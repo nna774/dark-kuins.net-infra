@@ -1,3 +1,4 @@
+name: clouddns apply
 on:
   push:
     branches:

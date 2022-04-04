@@ -1,3 +1,4 @@
+name: route53 apply
 on:
   push:
     branches:

@@ -1,0 +1,29 @@
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  apply:
+    name: apply iii
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: '2.7'
+      - name: bundle install
+        run: bundle install
+        working-directory: aws/route53
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
+          workload_identity_provider: '204148502022/locations/global/workloadIdentityPools/dark-kuins-net-infra-github-wf/providers/dark-kuins-net-infra-github-wf'
+          service_account: 'dark-kuins-net-infra-github-wf@united-crane-800.iam.gserviceaccount.com'
+      - name: apply
+        run: bundle exec ruby main.rb
+        working-directory: gcp/clouddns

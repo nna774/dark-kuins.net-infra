@@ -123,7 +123,7 @@ def execute
 end
 
 def hosted_zone(z, &body)
-  dns = Google::Cloud::Dns.new
+  dns = Google::Cloud::Dns.new(project_id: 'united-crane-800')
   zones = dns.zones
   zones.each do |zone|
     if z == zone.dns

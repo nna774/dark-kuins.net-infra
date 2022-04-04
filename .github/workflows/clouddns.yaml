@@ -22,11 +22,9 @@ jobs:
         with:
           workload_identity_provider: 'projects/204148502022/locations/global/workloadIdentityPools/dark-kuins-net-infra-github-wf/providers/dark-kuins-net-infra-github-wf'
           service_account: 'dark-kuins-net-infra-github-wf@united-crane-800.iam.gserviceaccount.com'
-      - name: 'Set up Cloud SDK'
-        uses: 'google-github-actions/setup-gcloud@v0'
       - name: bundle install
         run: bundle install
         working-directory: gcp/clouddns
       - name: apply
-        run: bundle exec ruby main.rb
+        run: DNS_CREDENTIALS=${{ steps.auth.outputs.credentials_file_path }} bundle exec ruby main.rb
         working-directory: gcp/clouddns

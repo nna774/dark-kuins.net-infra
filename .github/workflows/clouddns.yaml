@@ -24,6 +24,7 @@ jobs:
           workload_identity_provider: 'projects/204148502022/locations/global/workloadIdentityPools/dark-kuins-net-infra-github-wf/providers/dark-kuins-net-infra-github-wf'
           service_account: 'dark-kuins-net-infra-github-wf@united-crane-800.iam.gserviceaccount.com'
           token_format: 'id_token'
+          id_token_audience: https://iam.googleapis.com/projects/204148502022/locations/global/workloadIdentityPools/dark-kuins-net-infra-github-wf/providers/dark-kuins-net-infra-github-wf
       - name: bundle install
         run: bundle install
         working-directory: gcp/clouddns

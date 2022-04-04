@@ -23,9 +23,7 @@ jobs:
           create_credentials_file: 'true'
           workload_identity_provider: 'projects/204148502022/locations/global/workloadIdentityPools/dark-kuins-net-infra-github-wf/providers/dark-kuins-net-infra-github-wf'
           service_account: 'dark-kuins-net-infra-github-wf@united-crane-800.iam.gserviceaccount.com'
-          id_token_include_email: 'true'
-      - name: gcloud auth login by workload identity
-        run: gcloud auth login --brief --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          token_format: 'access_token'
       - name: bundle install
         run: bundle install
         working-directory: gcp/clouddns

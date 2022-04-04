@@ -22,8 +22,8 @@ jobs:
         with:
           workload_identity_provider: '204148502022/locations/global/workloadIdentityPools/dark-kuins-net-infra-github-wf/providers/dark-kuins-net-infra-github-wf'
           service_account: 'dark-kuins-net-infra-github-wf@united-crane-800.iam.gserviceaccount.com'
-      - name: default login
-        run: gcloud auth login --brief --cred-file=${{ steps.auth.outputs.credentials_file_path }}
+      - name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v0'
       - name: bundle install
         run: bundle install
         working-directory: gcp/clouddns

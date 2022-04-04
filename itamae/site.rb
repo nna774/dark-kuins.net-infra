@@ -65,7 +65,12 @@ MItamae::RecipeContext.class_eval do
   end
 
   DATA_BAGSS_DIR = File.expand_path('../data_bags', __FILE__)
-  def data_bag(name)
-    YAML.load(File.read(File.join(DATA_BAGSS_DIR, "#{name}.yml")))
+  def data_bag(name, type: :yaml)
+    case type
+    when :yaml
+      YAML.load(File.read(File.join(DATA_BAGSS_DIR, "#{name}.yml")))
+    when :json
+      JSON.parse(File.read(File.join(DATA_BAGSS_DIR, "#{name}.json")), symbolize_names: true)
+    end
   end
 end

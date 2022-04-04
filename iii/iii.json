@@ -38,6 +38,13 @@
     "name": "noracat",
     "kind": "switch",
     "region": "kitashirakawa",
+    "type": "cname",
+    "to": "masscat.switch.kitashirakawa.iii.dark-kuins.net"
+  },
+  {
+    "name": "masscat",
+    "kind": "switch",
+    "region": "kitashirakawa",
     "type": "a",
     "to": "10.8.0.36"
   },

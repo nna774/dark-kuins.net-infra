@@ -39,6 +39,8 @@ when 'debian'
     '7' => :wheezy,
     '8' => :jessie,
     '9' => :stretch,
+    '10' => :buster,
+    '11' => :bullseye,
   }.fetch(node[:platform_version].split('.', 2)[0])
   node[:is_systemd] = node[:release] != '7'
 when 'arch'

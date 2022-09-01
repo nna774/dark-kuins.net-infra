@@ -76,7 +76,7 @@ def show_update
   end
 end
 def show_destroy
-  puts "#{@destroy.length} records update"
+  puts "#{@destroy.length} records destroy"
   @destroy.each do |r|
     puts "\t-- #{r[:key]}: type: #{r[:type]} ttl: #{r[:ttl]} to:#{r[:to]}"
   end

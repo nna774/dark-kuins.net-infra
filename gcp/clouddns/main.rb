@@ -132,7 +132,7 @@ def hosted_zone(z, &body)
 
       body[]
       real_records = {}
-      zone.records.select { |r| r.type == 'A' || r.type == 'CNAME' }.each do |r|
+      zone.records.select { |r| r.type == 'A' || r.type == 'CNAME' || r.type == 'PTR' }.each do |r|
         real_records[(r.name + "-" + r.type).to_sym] = {
           key: r.name,
           type: r.type,

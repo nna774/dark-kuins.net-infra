@@ -2,6 +2,8 @@
 Description=Tell Owari
 Before=shutdown.target
 DefaultDependencies=no
+After=network-online.target unbound.service
+Wants=network-online.target unbound.service
 
 [Service]
 Type=oneshot

@@ -34,7 +34,7 @@ module RecipeHelper
   end
 
   def data_bag(name)
-    Hashie::Mash.load(File.join(__dir__, 'data_bags', "#{name}.yaml"))
+    Hashie::Mash.load(File.join(__dir__, 'data_bags', "#{name}.yml"))
   end
 end
 

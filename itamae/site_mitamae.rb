@@ -46,7 +46,7 @@ MItamae::RecipeContext.class_eval do
   end
 
   def data_bag(name)
-    path = File.join(File.expand_path('../data_bags', __FILE__), "#{name}.yaml")
+    path = File.join(File.expand_path('../data_bags', __FILE__), "#{name}.yml")
     Hashie::Mash.new(YAML.load(File.read(path)))
   end
 end

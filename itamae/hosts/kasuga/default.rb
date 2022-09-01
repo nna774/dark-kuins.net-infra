@@ -36,3 +36,5 @@ end
 include_role 'internal-dns'
 
 include_role 'dhcp'
+
+include_cookbook 'timezone'

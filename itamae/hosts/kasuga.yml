@@ -2,7 +2,7 @@ kasuga.compute.nakanoshima.dark-kuins.net:
   ask_sudo_password: false
   properties:
     ssh_options:
-      user: nona
+      user: nana
     attributes:
       gcp:
         region: asia-northeast2

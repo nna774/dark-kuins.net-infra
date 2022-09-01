@@ -46,7 +46,8 @@ include_cookbook 'mackerel-agent'
   package p
 end
 
-file '/etc/sysctl.d/50-ip-forward.conf' do
+# /etc/sysctl.d/60-gce-network-security.conf があるので、60より後でする必要がある。
+file '/etc/sysctl.d/70-ip-forward.conf' do
   owner 'root'
   group 'root'
   mode '0644'

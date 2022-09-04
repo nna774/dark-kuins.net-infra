@@ -46,40 +46,6 @@ end
 include_cookbook 'nana'
 include_cookbook 'disable-users'
 
-=begin
-
-execute 'prepre install docker' do
-  command 'curl -fsSL https://download.docker.com/linux/debian/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg && echo \
-  "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/debian \
-  $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null && apt-update'
-  not_if 'test -e /etc/apt/sources.list.d/docker.list'
-end
-
-%w(
-  docker-ce
-  docker-ce-cli
-  containerd.io
-  docker-compose-plugin
-).each do |p|
-  package p
-end
-
-execute 'install minikube' do
-  command 'curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_arm64.deb && dpkg -i minikube_latest_arm64.deb'
-  not_if 'which minikube'
-end
-
-execute 'docker group' do
-  command 'usermod -aG docker nana'
-  not_if 'groups nana | grep docker'
-end
-
-# swap 2GB
-
-# minikube autostart
-
-=end
-
 package 'ufw'
 # ufw conf file
 

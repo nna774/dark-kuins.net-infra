@@ -1,0 +1,6 @@
+[Match]
+Name=eth0.50
+
+[Network]
+Address=192.50.220.185/29
+Gateway=192.50.220.190

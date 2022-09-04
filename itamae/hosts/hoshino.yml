@@ -1,0 +1,8 @@
+hoshino.compute.kitashirakawa.iii.dark-kuins.net:
+  properties:
+    ask_sudo_password: false
+    preferred_driver: mitamae
+    run_list:
+      - hosts/hoshino/default.rb
+    ssh_options:
+      user: nana

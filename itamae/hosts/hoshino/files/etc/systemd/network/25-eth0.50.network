@@ -4,3 +4,6 @@ Name=eth0.50
 [Network]
 Address=192.50.220.185/29
 Gateway=192.50.220.190
+Address=2001:df0:8500:a702::14/64
+Gateway=2001:df0:8500:a702::1
+IPv6AcceptRA=false

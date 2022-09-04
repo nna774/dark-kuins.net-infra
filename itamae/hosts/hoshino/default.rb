@@ -81,3 +81,6 @@ end
 =end
 
 package 'ufw'
+# ufw conf file
+
+include_role 'mail'

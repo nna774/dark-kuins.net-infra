@@ -1,3 +1,5 @@
 itamae/secrets/keys
 
 .bundle
+
+.terraform/

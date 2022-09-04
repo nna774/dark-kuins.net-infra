@@ -1,5 +1,3 @@
-ask_sudo_password: true
-
 initializers:
   - site.rb
 

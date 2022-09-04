@@ -1,6 +1,6 @@
 hoshino.compute.kitashirakawa.iii.dark-kuins.net:
   properties:
-    ask_sudo_password: false
+    nopasswd_sudo: true
     preferred_driver: mitamae
     run_list:
       - hosts/hoshino/default.rb

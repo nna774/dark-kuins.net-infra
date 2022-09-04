@@ -47,6 +47,20 @@ include_cookbook 'nana'
 include_cookbook 'disable-users'
 
 package 'ufw'
-# ufw conf file
+%w(
+  /etc/ufw/user.rules
+  /etc/ufw/user6.rules
+).each do |f|
+  remote_file f do
+    owner 'root'
+    group 'root'
+    mode '644'
+    notifies :restart, 'service[ufw]'
+  end
+end
+
+service 'ufw' do
+  action [:start, :enable]
+end
 
 include_role 'mail'

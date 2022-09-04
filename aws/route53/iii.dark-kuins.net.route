@@ -53,6 +53,11 @@ hosted_zone 'iii.dark-kuins.net.' do
       raise "unknown type: #{host[:type]}"
     end
   end
+
+  rrset 'smtp.iii.dark-kuins.net.', 'CNAME' do
+    ttl 600
+    resource_records 'hoshino.compute.kitashirakawa.iii.dark-kuins.net.'
+  end
 end
 
 hosted_zone '10.in-addr.arpa.' do

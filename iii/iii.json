@@ -39,7 +39,7 @@
     "kind": "switch",
     "region": "kitashirakawa",
     "type": "cname",
-    "to": "masscat.switch.kitashirakawa.iii.dark-kuins.net."
+    "to": "masscat.switch.kitashirakawa.iii.dark-kuins.net"
   },
   {
     "name": "masscat",

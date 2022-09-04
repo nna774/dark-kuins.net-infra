@@ -32,7 +32,7 @@ end
 
 %w(
   /etc/systemd/network/10-eth0.network
-  /etc/systemd/network/20-eth0.50.netdev
+  /etc/systemd/network/23-eth0.50.netdev
   /etc/systemd/network/25-eth0.50.network
 ).each do |f|
   remote_file f do
@@ -80,4 +80,4 @@ end
 
 =end
 
-
+package 'ufw'

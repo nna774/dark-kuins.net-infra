@@ -1,6 +1,9 @@
 variable "kizuna" {
   default = "kizuna.router.kitashirakawa.dark-kuins.net."
 }
+variable "yukari" {
+  default = "yukari.router.kitashirakawa.dark-kuins.net."
+}
 variable "hoshino" {
   default = "hoshino.compute.kitashirakawa.dark-kuins.net."
 }
@@ -23,6 +26,16 @@ resource "google_dns_record_set" "hoshino" {
   managed_zone = google_dns_managed_zone.rev-kitashirakawa.name
 
   rrdatas = [var.hoshino]
+}
+
+resource "google_dns_record_set" "yukari" {
+  name = "189.${google_dns_managed_zone.rev-kitashirakawa.dns_name}"
+  type = "PTR"
+  ttl  = 3600
+
+  managed_zone = google_dns_managed_zone.rev-kitashirakawa.name
+
+  rrdatas = [var.yukari]
 }
 
 resource "google_dns_record_set" "kizuna" {

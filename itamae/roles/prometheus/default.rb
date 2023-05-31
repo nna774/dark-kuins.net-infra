@@ -8,26 +8,31 @@ packages.each do |p|
   end
 end
 
-template '/etc/default/prometheus' do
-  owner 'prometheus'
-  group 'prometheus'
-  mode '0644'
-  notifies :restart, 'service[prometheus]'
+%w(
+  /etc/default/prometheus
+  /etc/prometheus/prometheus.yml
+  /etc/prometheus/rules.yml
+).each do |n|
+  template n do
+    owner 'prometheus'
+    group 'prometheus'
+    mode '0644'
+    notifies :restart, 'service[prometheus]'
+  end
 end
 
-template '/etc/prometheus/prometheus.yml' do
-  owner 'prometheus'
-  group 'prometheus'
-  mode '0644'
-  notifies :restart, 'service[prometheus]'
+%w(
+  /etc/default/prometheus-alertmanager
+  /etc/prometheus/alertmanager.yml
+).each do |n|
+  template n do
+    owner 'prometheus'
+    group 'prometheus'
+    mode '0644'
+    notifies :restart, 'service[prometheus-alertmanager]'
+  end
 end
 
-template '/etc/prometheus/alertmanager.yml' do
-  owner 'prometheus'
-  group 'prometheus'
-  mode '0644'
-  notifies :restart, 'service[prometheus-alertmanager]'
-end
 
 =begin
 execute 'install grafana' do

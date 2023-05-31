@@ -1,0 +1,9 @@
+groups:
+  - name: co2
+    rules:
+      - alert: high co2
+        expr: udco2s_CO2{job="ud_cos2"} > 500
+        for: 1m
+        annotations:
+          summary: CO2濃度高すぎ！
+          description: "換気をしましょう。現在の濃度: {{ $value }}ppm"

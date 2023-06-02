@@ -2,7 +2,7 @@ groups:
   - name: co2
     rules:
       - alert: high co2
-        expr: udco2s_CO2{job="ud_cos2"} > 500
+        expr: udco2s_CO2{job="ud_cos2"} > 700
         for: 1m
         annotations:
           summary: CO2濃度高すぎ！

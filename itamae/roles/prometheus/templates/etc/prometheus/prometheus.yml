@@ -36,16 +36,9 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: tsugu
-    # If prometheus-node-exporter is installed, grab stats about the local
-    # machine by default.
+  - job_name: prometheus-node-exporter
     static_configs:
       - targets: ['localhost:9100']
-
-  - job_name: ushio
-    # If prometheus-node-exporter is installed, grab stats about the local
-    # machine by default.
-    static_configs:
       - targets: ['ushio.compute.kitashirakawa.iii.dark-kuins.net:9100']
 
   - job_name: ud_cos2

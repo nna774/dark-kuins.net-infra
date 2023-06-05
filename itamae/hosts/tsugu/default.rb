@@ -18,10 +18,12 @@ node.reverse_merge!({
     dhparam_user: 'root',
   },
   rproxy: {
+    dns: '10.8.192.42 10.8.208.42',
     canonical: 'tsugu.compute.nishiogikubo.dark-kuins.net',
-    alts: [
-      'grafana.dark-kuins.net',
-    ],
+    alts: %w(
+      prometheus.dark-kuins.net
+      grafana.dark-kuins.net
+    ),
   },
   strongswan: {
     profiles: [

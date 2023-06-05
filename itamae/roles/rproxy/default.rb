@@ -19,29 +19,31 @@ include_cookbook 'nginx'
   end
 end
 
-webroot = node[:rproxy][:webroot] || '/var/www/certbot' 
+webroot = node[:rproxy][:webroot] || '/var/www/certbot'
 directory webroot do
   owner 'root'
   group 'root'
   mode '0755'
-end 
+end
 
 template '/etc/nginx/utils/certbot.conf' do
   variables ({ webroot: "#{webroot}/" })
   owner 'root'
   group 'root'
   mode '0644'
-end 
+  notifies :reload, 'service[nginx]'
+end
 
 template '/etc/nginx/tls_modern.conf' do
   variables ({
-		dns: '10.8.192.42',
+		dns: node[:rproxy][:dns],
 		cert: '/etc/letsencrypt/live/tsugu.compute.nishiogikubo.dark-kuins.net/fullchain.pem',
 		key: '/etc/letsencrypt/live/tsugu.compute.nishiogikubo.dark-kuins.net/privkey.pem',
   })
   owner 'root'
   group 'root'
   mode '0644'
+  notifies :reload, 'service[nginx]'
 end
 
 %w(

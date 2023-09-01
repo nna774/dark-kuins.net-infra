@@ -1,3 +1,10 @@
+node.reverse_merge!(
+  prometheus: {
+    thanos: {
+      version: '0.31.0',
+    },
+  },
+)
 packages = %w(prometheus prometheus-alertmanager)
 
 packages.each do |p|
@@ -33,6 +40,11 @@ end
   end
 end
 
+execute 'install thanos' do
+  cwd '/tmp'
+  command "wget https://github.com/thanos-io/thanos/releases/download/v#{node[:prometheus][:thanos][:version]}/thanos-#{node[:prometheus][:thanos][:version]}.linux-amd64.tar.gz -O /tmp/thanos.tar.gz && tar xf /tmp/thanos.tar.gz && cp /tmp/thanos-#{node[:prometheus][:thanos][:version]}.linux-amd64/thanos /usr/local/bin"
+  not_if 'test -e /usr/local/bin/thanos'
+end
 
 =begin
 execute 'install grafana' do
@@ -44,3 +56,5 @@ service 'grafana-server' do
   action [:start, :enable]
 end
 =end
+
+package 'snmp' # for snmp exporter

@@ -60,6 +60,7 @@ end
 
 include_role 'internal-dns'
 
+=begin
 include_role 'td-agent-aggregate'
 
 include_cookbook 'postfix'
@@ -77,6 +78,8 @@ remote_file '/etc/postfix/main.cf' do
 end
 
 include_cookbook 'iptables'
+
+=end
 
 include_cookbook 'slack'
 include_cookbook 'aisatsu'

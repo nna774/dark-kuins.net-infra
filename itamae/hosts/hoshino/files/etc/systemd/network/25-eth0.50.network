@@ -2,8 +2,14 @@
 Name=eth0.50
 
 [Network]
-Address=192.50.220.185/29
-Gateway=192.50.220.190
+Address=169.254.220.185/29
+Scope=link
+
 Address=2001:df0:8500:a702::14/64
 Gateway=2001:df0:8500:a702::1
 IPv6AcceptRA=false
+
+[Route]
+Gateway=169.254.220.190
+GatewayOnLink=true
+PreferredSource=192.50.220.185

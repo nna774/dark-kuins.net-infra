@@ -31,6 +31,7 @@ service 'systemd-networkd' do
 end
 
 %w(
+  /etc/systemd/network/01-lo.network
   /etc/systemd/network/10-eth0.network
   /etc/systemd/network/23-eth0.50.netdev
   /etc/systemd/network/25-eth0.50.network

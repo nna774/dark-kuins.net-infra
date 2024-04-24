@@ -70,3 +70,5 @@ service 'ufw' do
 end
 
 include_role 'mail'
+
+package 'tmux'

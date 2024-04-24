@@ -1,6 +1,9 @@
 [Match]
 Name=eth0.50
 
+[Link]
+MTUBytes=1350
+
 [Network]
 Address=169.254.220.185/29
 Scope=link

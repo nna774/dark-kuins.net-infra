@@ -37,11 +37,12 @@ user username do
   create_home true
 end
 
-directory "/home/#{username}" do
-  owner username
-  group username
-  mode node.dig(:nana, :homedir_mode)
-end
+#directory "/home/#{username}" do
+#  owner username
+#  group username
+#  mode node[:nana].fetch(:homedir_mode)
+#end
+## なぜか↑があると /home/alarm/mitamae/mrblib/mitamae/recipe_executor.rb:24:undefined method 'name' for #<NilClass:0x0> (NoMethodError) と死ぬ
 
 directory "/home/#{username}/.ssh" do
   owner username

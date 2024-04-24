@@ -47,6 +47,11 @@ end
 include_cookbook 'nana'
 include_cookbook 'disable-users'
 
+include_cookbook 'sshd' # for ban password auth
+# -Subsystem       sftp    /usr/lib/openssh/sftp-server
+# +Subsystem       sftp    /usr/lib/ssh/sftp-server
+## これなんとかしないといけないかも。
+
 package 'ufw'
 %w(
   /etc/ufw/user.rules

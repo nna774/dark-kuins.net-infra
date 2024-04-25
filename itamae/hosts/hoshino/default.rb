@@ -71,4 +71,10 @@ end
 
 include_role 'mail'
 
-package 'tmux'
+%w(
+  tmux
+  dnsutils
+  mtr
+).each do |p|
+  package p
+end

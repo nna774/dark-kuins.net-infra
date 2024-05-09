@@ -6,7 +6,7 @@ unless allow_users.nil?
 end
 
 sftp_path = '/usr/lib/ssh/sftp-server'
-if node[:os] == :ubuntu
+if node[:platform] == 'ubuntu' || node[:platform] == 'debian'
   sftp_path = '/usr/lib/openssh/sftp-server'
 end
 

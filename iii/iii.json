@@ -91,6 +91,13 @@
     "to": "10.8.30.14"
   },
   {
+    "name": "ao",
+    "kind": "router",
+    "region": "kitashirakawa",
+    "type": "a",
+    "to": "10.8.30.17"
+  },
+  {
     "name": "alice",
     "kind": "compute",
     "region": "kitashirakawa",

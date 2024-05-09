@@ -14,9 +14,20 @@ ask_sudo_password: true
 
 driver_options:
   mitamae:
-    mitamae_path: /usr/local/bin/mitamae
+    mitamae_path: /usr/bin/mitamae
     mitamae_options: ['--log-level', 'info']
     mitamae_prepare_script: >
-      if [ `uname -m` = 'x86_64' ]; then wget -O /usr/local/bin/mitamae https://static.nna774.net/mitamae/mitamae-linux-x86-64-v1.9.7; fi &&
-      if [ `uname -m` = 'aarch64' ]; then wget -O /usr/local/bin/mitamae https://static.nna774.net/mitamae/mitamae-aarch64-d2d4b4c487cdbe1f524f093a1c4b18d53237728e; fi &&
-      chmod +x /usr/local/bin/mitamae
+      if [ -e /etc/apt ]; then
+          set -ex
+          export DEBIAN_FRONTEND=noninteractive
+          if ! command -v curl >/dev/null; then
+            apt-get update
+            apt-get install -y curl ca-certificates
+          fi
+          if [ ! -e /etc/apt/sources.list.d/nekomit.list ]; then
+            curl -Ssf https://sorah.jp/packaging/debian/C3FF3305.pub.txt -o /usr/share/keyrings/nekomit.asc
+            echo "deb [signed-by=/usr/share/keyrings/nekomit.asc] http://deb.nekom.it/ $(grep VERSION_CODENAME /etc/os-release|cut -d= -f2) main" > /etc/apt/sources.list.d/nekomit.list
+          fi
+          apt-get update
+          apt-get install -y mitamae
+        fi

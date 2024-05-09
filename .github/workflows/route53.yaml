@@ -20,5 +20,5 @@ jobs:
         run: bundle install
         working-directory: aws/route53
       - name: apply
-        run: change=`git diff HEAD^..HEAD ../../iii/iii.json`; [ -z "${change}" ] || bundle exec roadwork -a -k ${ACCESS_KEY} -s ${SECRET_KEY}
+        run: change=`git diff HEAD^..HEAD ../../iii/iii.json iii.dark-kuins.net.route Gemfile Gemfile.lock`; [ -z "${change}" ] || bundle exec roadwork -a -k ${ACCESS_KEY} -s ${SECRET_KEY}
         working-directory: aws/route53

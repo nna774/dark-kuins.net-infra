@@ -41,5 +41,17 @@ service 'systemd-networkd' do
 end
 
 package 'ifupdown' do
-  action :nothing # :remove # これ突然removeすると多分ひきこもる。
+  action :remove
+end
+
+%w(
+  /etc/systemd/network/11-enp11s0f0.network
+  /etc/systemd/network/12-enp11s0f1.network
+).each do |f|
+  remote_file f do
+    owner 'root'
+    group 'root'
+    mode '644'
+    notifies :restart, 'service[systemd-networkd]'
+  end
 end

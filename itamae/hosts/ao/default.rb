@@ -55,3 +55,5 @@ end
     notifies :restart, 'service[systemd-networkd]'
   end
 end
+
+include_cookbook 'sshd'

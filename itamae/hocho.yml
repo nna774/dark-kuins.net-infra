@@ -10,6 +10,8 @@ inventory_providers:
   - file:
       path: './hosts'
 
+ask_sudo_password: true
+
 driver_options:
   mitamae:
     mitamae_path: /usr/local/bin/mitamae

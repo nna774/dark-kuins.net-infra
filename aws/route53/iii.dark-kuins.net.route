@@ -64,7 +64,7 @@ hosted_zone '10.in-addr.arpa.' do
   vpc 'ap-northeast-1', 'vpc-09e11cbdafca64241'
 
   iii.each do |host|
-    if host[:to].match /\d+\.\d+\.\d+\.\d+/
+    if host[:to].match(/\d+\.\d+\.\d+\.\d+/)
       include_template :iii_rev, name: host[:name], kind: host[:kind], region: host[:region], to: host[:to]
     end
   end

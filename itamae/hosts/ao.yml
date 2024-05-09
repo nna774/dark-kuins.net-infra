@@ -1,0 +1,6 @@
+ao.tbd:
+  properties:
+    ssh_options:
+      user: nana
+    run_list:
+      - cookbooks/hello.rb

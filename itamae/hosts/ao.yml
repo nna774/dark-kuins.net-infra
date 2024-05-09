@@ -3,4 +3,4 @@ ao.tbd:
     ssh_options:
       user: nana
     run_list:
-      - cookbooks/hello.rb
+      - hosts/ao/default.rb

@@ -15,6 +15,10 @@ execute 'apt-get update' do
   action :nothing
 end
 
+execute 'update-grub' do
+  action :nothing
+end
+
 define :apt_key, keyname: nil do
   name = params[:keyname] || params[:name]
   execute "apt-key #{name}" do

@@ -25,11 +25,16 @@ GEM
     jmespath (1.6.2)
     macaddr (1.7.2)
       systemu (~> 2.6.5)
+    mini_portile2 (2.8.6)
     net-ftp (0.3.4)
       net-protocol
       time
     net-protocol (0.2.2)
       timeout
+    nokogiri (1.16.4)
+      mini_portile2 (~> 2.8.2)
+      racc (~> 1.4)
+    racc (1.7.3)
     roadworker (0.5.16)
       aws-sdk-route53 (>= 1.22.0)
       diffy
@@ -62,6 +67,7 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-ec2
   net-ftp
+  nokogiri
   roadworker (>= 0.5.9.beta7)
 
 BUNDLED WITH

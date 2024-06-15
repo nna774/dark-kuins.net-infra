@@ -57,3 +57,9 @@ end
 end
 
 include_cookbook 'sshd'
+
+%w(
+  bind9-dnsutils
+).each do |p|
+  package p
+end

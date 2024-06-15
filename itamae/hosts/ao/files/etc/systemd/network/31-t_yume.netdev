@@ -1,0 +1,9 @@
+[NetDev]
+Name=t_yume
+Kind=ip6tnl
+
+[Tunnel]
+Local=240b:250:8020:d00::17
+Remote=2001:f74:9800:400::eb96
+Mode=any
+EncapsulationLimit=none

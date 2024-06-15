@@ -1,0 +1,11 @@
+[Match]
+Name=t_yume
+
+[Network]
+DHCP=off
+IPv6AcceptRA=no
+IPForward=yes
+
+[Address]
+Address=2001:0df0:8500:0022::120:13/128
+Peer=2001:0df0:8500:0022::120:12/128

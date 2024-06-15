@@ -6,7 +6,6 @@ Name=enp11s0f1
 Address=10.8.30.17/24
 DNS=10.8.192.42
 DNS=10.8.208.42
-# Address=2001:df0:8500:a7a3::17/64
 
 IPv6AcceptRA=false
 

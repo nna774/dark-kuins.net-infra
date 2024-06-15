@@ -2,5 +2,8 @@
 Name=lo
 
 [Network]
-Address=192.50.220.185/32
+Address=192.50.220.191/32
+Scope=global
 
+[Network]
+Address=2001:df0:8500:a717::1/64

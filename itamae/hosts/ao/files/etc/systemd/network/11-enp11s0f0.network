@@ -7,5 +7,10 @@ Name=enp11s0f0
 Address=240b:250:8020:d00::17/64
 IPv6AcceptRA=true
 
-[Route]
+Tunnel=t_yume
 
+[Route]
+Destination=::/0
+Gateway=fe80::a
+Table=100
+Metric=2000

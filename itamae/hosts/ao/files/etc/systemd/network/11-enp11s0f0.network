@@ -1,8 +1,11 @@
 [Match]
 # port 1
+# NGN
 Name=enp11s0f0
 
 [Network]
+Address=240b:250:8020:d00::17/64
+IPv6AcceptRA=true
 
 [Route]
 

@@ -10,7 +10,9 @@ variable "love" {
 variable "hoshino" {
   default = "hoshino.compute.kitashirakawa.dark-kuins.net."
 }
-
+variable "ao" {
+  default = "ao.router.kitashirakawa.dark-kuins.net."
+}
 
 resource "google_dns_managed_zone" "rev-kitashirakawa" {
   name        = "rev-kitashirakawa"
@@ -59,6 +61,16 @@ resource "google_dns_record_set" "kizuna" {
   managed_zone = google_dns_managed_zone.rev-kitashirakawa.name
 
   rrdatas = [var.kizuna]
+}
+
+resource "google_dns_record_set" "ao" {
+  name = "191.${google_dns_managed_zone.rev-kitashirakawa.dns_name}"
+  type = "PTR"
+  ttl  = 3600
+
+  managed_zone = google_dns_managed_zone.rev-kitashirakawa.name
+
+  rrdatas = [var.ao]
 }
 
 resource "google_dns_managed_zone" "rev-kitashirakawa6" {

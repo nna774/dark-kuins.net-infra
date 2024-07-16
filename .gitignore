@@ -1,4 +1,5 @@
-itamae/secrets/keys
+itamae/secrets/keys/*
+!itamae/secrets/keys/.gitkeep
 
 .bundle
 

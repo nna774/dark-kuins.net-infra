@@ -3,6 +3,7 @@ tsugu.compute.nishiogikubo.dark-kuins.net:
   properties:
     ssh_options:
       user: nana
+      verbose: :warn
     attributes:
       aws:
         region: ap-northeast-1

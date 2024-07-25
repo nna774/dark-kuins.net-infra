@@ -7,3 +7,9 @@ groups:
         annotations:
           summary: CO2濃度高すぎ！
           description: "換気をしましょう。現在の濃度: {{ $value }}ppm"
+      - alert: monitoring stopped
+        expr: time() - udco2s_CO2{job="udco2s_last"} > 1800
+        for: 1m
+        annotations:
+          summary: CO2モニタリング停止
+          description: "CO2モニタリングが停止しています。"

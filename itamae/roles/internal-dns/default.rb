@@ -11,7 +11,7 @@ if !node[:internal_dns][:keep_resolveconf]
     only_if 'test -h /etc/resolve.conf'
   end
 
-  file '/etc/resolve.conf' do
+  file '/etc/resolv.conf' do
     content "nameserver 127.0.0.1\nsearch #{node[:internal_dns][:self_search]}\n"
     owner 'root'
     group 'root'

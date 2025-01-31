@@ -13,3 +13,11 @@ groups:
         annotations:
           summary: CO2モニタリング停止
           description: "CO2モニタリングが停止しています。"
+      - alert: ValueHundredsChanged
+        expr: floor(udco2s_CO2{job="ud_cos2"} / 100) != floor(udco2s_CO2{job="ud_cos2"} / 100 offset 1m)
+        for: 0m
+        labels:
+          severity: info
+        annotations:
+          summary: C02濃度お知らせ
+          description: "現在の濃度: {{ udco2s_CO2{job="ud_cos2"} }}ppm"

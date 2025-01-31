@@ -19,5 +19,5 @@ groups:
         labels:
           severity: info
         annotations:
-          summary: C02濃度お知らせ
+          summary: CO2濃度お知らせ
           description: "現在の濃度: {{ udco2s_CO2{job="ud_cos2"} }}ppm"

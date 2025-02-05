@@ -6,9 +6,9 @@ service 'systemd-resolved' do
 end
 
 if !node[:internal_dns][:keep_resolveconf]
-  file '/etc/resolve.conf' do
+  file '/etc/resolv.conf' do
     action :delete
-    only_if 'test -h /etc/resolve.conf'
+    only_if 'test -h /etc/resolv.conf'
   end
 
   file '/etc/resolv.conf' do

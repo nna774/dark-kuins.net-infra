@@ -20,7 +20,7 @@ GEM
       thor
     net-scp (4.0.0)
       net-ssh (>= 2.6.5, < 8.0.0)
-    net-ssh (7.2.3)
+    net-ssh (7.3.0)
     net-telnet (0.2.0)
     schash (0.1.2)
     sfl (2.3)

@@ -16,6 +16,8 @@ server:
   val-permissive-mode: yes
   local-zone: "10.in-addr.arpa." transparent
 
+  qname-minimisation: yes
+
 forward-zone:
   name: "iii.dark-kuins.net."
   forward-addr: <%= @forward %>

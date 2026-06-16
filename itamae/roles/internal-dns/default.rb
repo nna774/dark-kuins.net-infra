@@ -6,8 +6,12 @@ service 'systemd-resolved' do
 end
 
 if !node[:internal_dns][:keep_resolveconf]
-  file '/etc/resolv.conf' do
-    action :delete
+  # /etc/resolv.conf が symlink(systemd-resolved の stub 等)なら除去してから
+  # 実ファイルを書く。mitamae の file :delete は dangling symlink を消せない
+  # (test -e が偽で「存在しない」と判断しスキップ)ため execute rm -f を使う。
+  # do-release-upgrade はこの symlink を貼り直すので、upgrade 後に必要になる。
+  execute 'remove resolv.conf symlink' do
+    command 'rm -f /etc/resolv.conf'
     only_if 'test -h /etc/resolv.conf'
   end
 

@@ -14,6 +14,9 @@ node.reverse_merge!({
     role: :slave,
     interfacesv4: 'ens4',
   },
+  journald: {
+    system_max_use: '200M',
+  },
 })
 
 file '/etc/hosts' do
@@ -59,3 +62,20 @@ include_role 'internal-dns'
 include_role 'dhcp'
 
 include_cookbook 'timezone'
+
+include_cookbook 'journald'
+include_cookbook 'swap'
+
+# Google Cloud Ops Agent は使っていない(監視は mackerel と prometheus/node_exporter)。
+# サービスアカウントに monitoring 権限が無く動作していない上、シャットダウン時に
+# 子プロセス google_cloud_ops_agent_diagnostics が終了せず数分ハングする原因に
+# なっていたため無効化する。
+%w(
+  google-cloud-ops-agent
+  google-cloud-ops-agent-fluent-bit
+  google-cloud-ops-agent-opentelemetry-collector
+).each do |svc|
+  service svc do
+    action [:stop, :disable]
+  end
+end

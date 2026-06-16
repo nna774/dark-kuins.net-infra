@@ -5,6 +5,11 @@ node.reverse_merge!(
   nana: {
     sudo_nopasswd: true,
   },
+  unattended_upgrades: {
+    # 既存の apt-listchanges メールと同じ root@dark-kuins.net 宛で届く
+    # (postfix virtual_maps が root -> nana -> nna@nna774.net に転送)
+    mail: 'root',
+  },
 )
 
 file '/etc/hostname' do
@@ -48,6 +53,8 @@ include_cookbook 'nana'
 include_cookbook 'disable-users'
 
 include_cookbook 'sshd' # for ban password auth
+
+include_cookbook 'unattended-upgrades'
 
 package 'ufw'
 %w(

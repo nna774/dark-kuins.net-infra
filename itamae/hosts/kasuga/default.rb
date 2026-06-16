@@ -79,3 +79,32 @@ include_cookbook 'swap'
     action [:stop, :disable]
   end
 end
+
+# google-shutdown-scripts.service は TimeoutStopSec=infinity で、刺さると
+# シャットダウンが無限に止まる(24.04 への do-release-upgrade 時に発生)。
+# 上限を被せて一定時間で SIGKILL させ shutdown が必ず進むようにする。
+directory '/etc/systemd/system/google-shutdown-scripts.service.d' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+end
+
+file '/etc/systemd/system/google-shutdown-scripts.service.d/timeout.conf' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  content "[Service]\nTimeoutStopSec=30s\n"
+  notifies :run, 'execute[systemctl daemon-reload]'
+end
+
+# IPv6 DHCP は使わない(v4/ens4 のみ運用)。resolvconf 連携は internal-dns が
+# /etc/resolv.conf を直接管理するため不要。どちらも upgrade 後に failed になるので mask する。
+%w(
+  isc-dhcp-server6
+  unbound-resolvconf
+).each do |svc|
+  execute "mask #{svc}" do
+    command "systemctl mask --now #{svc}.service"
+    not_if %{test "$(systemctl is-enabled #{svc}.service 2>/dev/null)" = masked}
+  end
+end

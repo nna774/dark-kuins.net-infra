@@ -83,6 +83,7 @@ node.reverse_merge!(
       %("#nona-kanshi (Slack)" <#{node[:secrets][:upstream_watch_slack_mail]}>),
       'root@dark-kuins.net',
     ],
+    timer: true,
   },
 )
 include_cookbook 'upstream-watch'

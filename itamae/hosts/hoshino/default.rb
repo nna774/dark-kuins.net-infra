@@ -75,6 +75,18 @@ end
 
 include_role 'mail'
 
+node.reverse_merge!(
+  upstream_watch: {
+    router_ssh: 'uwatch@10.8.0.2',
+    mail_to: [
+      # Slack のチャンネル宛メールアドレスは投稿権限そのものなので secret
+      %("#nona-kanshi (Slack)" <#{node[:secrets][:upstream_watch_slack_mail]}>),
+      'root@dark-kuins.net',
+    ],
+  },
+)
+include_cookbook 'upstream-watch'
+
 %w(
   tmux
   dnsutils

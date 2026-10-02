@@ -1,0 +1,3 @@
+[submodule "itamae/vendor/upstream-watch"]
+	path = itamae/vendor/upstream-watch
+	url = https://github.com/nna774/upstream-watch.git

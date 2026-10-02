@@ -1,0 +1,14 @@
+type: txt
+help: Encapsulation of this IPv6 tunnel interface [REQUIRED]
+default: "ip6gre"
+
+syntax:expression: $VAR(@) in "ip6gre", "ipip6", "any"; "Must be (ip6gre, ipip6, any)"
+allowed: echo ip6gre ipip6 any
+
+create:expression: "true"
+update:expression: "false" ; \
+               "Encapsulation can only be set at tunnel creation for $VAR(../@)"
+
+val_help: ip6gre; Generic Routing Encapsulation via IPv6
+val_help: ipip6; IPv4 Encapsulation via IPv6
+val_help: any; v4 and v6 via IPv6

@@ -1,0 +1,10 @@
+type: txt
+help: Encaplimit field
+val_help: txt; Encaplimit (default 4)
+
+val_help: <0-255>; Sets a fixed encapsulation limit. Default is 4.
+val_help: none; Sets no encapsulation limit.
+
+syntax:expression: ($VAR(@) == "none" || (pattern $VAR(@) "[0-9]*")) ; "Must be 'none' or a number between 0-255"
+update: sudo ip -6 tunnel change $VAR(../@) encaplimit $VAR(@);
+delete: sudo ip -6 tunnel change $VAR(../@) encaplimit 4

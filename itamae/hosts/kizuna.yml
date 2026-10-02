@@ -1,0 +1,9 @@
+kizuna.router.kitashirakawa.iii.dark-kuins.net:
+  properties:
+    # mitamae は mips バイナリが無いので動かない。ssh driver はターゲットに Ruby を要求しない
+    preferred_driver: itamae_ssh
+    nopasswd_sudo: true
+    ssh_options:
+      user: nana
+    run_list:
+      - hosts/kizuna/default.rb

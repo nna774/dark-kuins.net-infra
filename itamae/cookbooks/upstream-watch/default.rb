@@ -12,6 +12,10 @@ node.reverse_merge!(
     mail_to: [],
     # 定期実行。false の間は systemctl start / sudo -u upstream-watch で手動
     timer: false,
+    # timer の間隔 (systemd の時間表記)。nil なら同梱 unit の既定 (5min)
+    interval: nil,
+    # probe ごとの最短実行間隔 (秒)。間隔を詰めても重い probe だけ間引ける
+    min_interval: {},
   },
 )
 
@@ -90,6 +94,7 @@ file '/etc/upstream-watch/env' do
     ROUTER_SSH=#{node[:upstream_watch][:router_ssh]}
     ROUTER_SSH_OPTS='-o BatchMode=yes -o ConnectTimeout=10 -i /etc/upstream-watch/id_ed25519 -o UserKnownHostsFile=/etc/upstream-watch/known_hosts -o StrictHostKeyChecking=yes'
     CONFIRM_PROBES='mtr-upstream'
+    #{node[:upstream_watch][:min_interval].map { |probe, sec| "MIN_INTERVAL_#{probe.to_s.upcase.tr('-', '_')}=#{Integer(sec)}" }.join("\n")}
   ENV
 end
 
@@ -108,6 +113,33 @@ remote_file '/etc/systemd/system/upstream-watch.timer' do
   mode '0644'
   notifies :run, 'execute[systemctl daemon-reload]', :immediately
   action node[:upstream_watch][:timer] ? :create : :delete
+end
+
+interval = node[:upstream_watch][:timer] && node[:upstream_watch][:interval]
+
+directory '/etc/systemd/system/upstream-watch.timer.d' do
+  owner 'root'
+  group 'root'
+  mode '0755'
+  action interval ? :create : :delete
+end
+
+# 同梱 unit の間隔だけを上書きする。AccuracySec の既定は 1min で、それだと
+# 1 分間隔の timer が最大 1 分遅れて発火し間隔が倍近くまで揺れる
+file '/etc/systemd/system/upstream-watch.timer.d/interval.conf' do
+  owner 'root'
+  group 'root'
+  mode '0644'
+  content <<~UNIT
+    [Timer]
+    OnUnitActiveSec=
+    OnUnitActiveSec=#{interval}
+    RandomizedDelaySec=0
+    AccuracySec=1s
+  UNIT
+  action interval ? :create : :delete
+  notifies :run, 'execute[systemctl daemon-reload]', :immediately
+  notifies :restart, 'service[upstream-watch.timer]'
 end
 
 service 'upstream-watch.timer' do

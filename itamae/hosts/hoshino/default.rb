@@ -84,6 +84,10 @@ node.reverse_merge!(
       'root@dark-kuins.net',
     ],
     timer: true,
+    # BGP 側の瞬断はだいたい 1 分以内に戻るので、それを拾える間隔にする。
+    # mtr は 1 回 30 秒かかり、見ているのも上流の構造変化なので 5 分のまま
+    interval: '1min',
+    min_interval: { 'mtr-upstream' => 300 },
   },
 )
 include_cookbook 'upstream-watch'

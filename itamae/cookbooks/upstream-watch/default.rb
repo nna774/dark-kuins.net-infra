@@ -1,8 +1,7 @@
-# upstream-watch (https://github.com/nna774/upstream-watch) を配る。
-# 本体は submodule itamae/vendor/upstream-watch が正で、ここには複製を持たない。
-# submodule の pin がどの版を配ったかの記録になる。
+# https://github.com/nna774/upstream-watchを配る
 
-src = File.join(node[:basedir], 'vendor', 'upstream-watch')
+include_cookbook 'upstream-watch::revision'
+src = node[:upstream_watch][:source]
 
 node.reverse_merge!(
   upstream_watch: {
@@ -47,16 +46,16 @@ directory '/var/lib/upstream-watch' do
   mode '0755'
 end
 
-remote_file '/usr/local/bin/upstream-watch' do
-  source File.join(src, 'upstream-watch')
+http_request '/usr/local/bin/upstream-watch' do
+  url "#{src}/upstream-watch"
   owner 'root'
   group 'root'
   mode '0755'
 end
 
 node[:upstream_watch][:probes].each do |probe|
-  remote_file File.join('/usr/local/libexec/upstream-watch', probe) do
-    source File.join(src, 'probes', probe)
+  http_request File.join('/usr/local/libexec/upstream-watch', probe) do
+    url "#{src}/probes/#{probe}"
     owner 'root'
     group 'root'
     mode '0755'
@@ -98,21 +97,28 @@ file '/etc/upstream-watch/env' do
   ENV
 end
 
-remote_file '/etc/systemd/system/upstream-watch.service' do
-  source File.join(src, 'systemd', 'upstream-watch.service')
+http_request '/etc/systemd/system/upstream-watch.service' do
+  url "#{src}/systemd/upstream-watch.service"
   owner 'root'
   group 'root'
   mode '0644'
   notifies :run, 'execute[systemctl daemon-reload]', :immediately
 end
 
-remote_file '/etc/systemd/system/upstream-watch.timer' do
-  source File.join(src, 'systemd', 'upstream-watch.timer')
-  owner 'root'
-  group 'root'
-  mode '0644'
-  notifies :run, 'execute[systemctl daemon-reload]', :immediately
-  action node[:upstream_watch][:timer] ? :create : :delete
+if node[:upstream_watch][:timer]
+  http_request '/etc/systemd/system/upstream-watch.timer' do
+    url "#{src}/systemd/upstream-watch.timer"
+    owner 'root'
+    group 'root'
+    mode '0644'
+    notifies :run, 'execute[systemctl daemon-reload]', :immediately
+  end
+else
+  # http_requestのactionはHTTPメソッドを指すので、消すのはfileで行う
+  file '/etc/systemd/system/upstream-watch.timer' do
+    action :delete
+    notifies :run, 'execute[systemctl daemon-reload]', :immediately
+  end
 end
 
 interval = node[:upstream_watch][:timer] && node[:upstream_watch][:interval]

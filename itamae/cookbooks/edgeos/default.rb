@@ -9,7 +9,10 @@
 # mitamae は mips バイナリが無いので動かない。driver は itamae_ssh を使う。
 # busybox userland なので package / user リソースは使えない (useradd が無い)。
 
-src = File.join(node[:basedir], 'vendor', 'upstream-watch')
+require 'net/http'
+
+include_cookbook 'upstream-watch::revision'
+src = node[:upstream_watch][:source]
 
 templates = '/opt/vyatta/share/vyatta-cfg/templates/interfaces'
 
@@ -78,8 +81,13 @@ end
 
 # ---- upstream-watch からの読み取り ----
 
-remote_file '/config/scripts/upstream-watch-fetch' do
-  source File.join(src, 'edgeos', 'upstream-watch-fetch')
+# itamaeのhttp_requestは内容が同じでも毎回書き直すので、recipeの評価時に取得してfileに比較させる
+fetch_url = URI("#{src}/edgeos/upstream-watch-fetch")
+fetch_res = Net::HTTP.get_response(fetch_url)
+raise "#{fetch_url} の取得に失敗した: #{fetch_res.code}" unless fetch_res.is_a?(Net::HTTPSuccess)
+
+file '/config/scripts/upstream-watch-fetch' do
+  content fetch_res.body
   owner 'root'
   group 'vyattacfg'
   mode '0755'
